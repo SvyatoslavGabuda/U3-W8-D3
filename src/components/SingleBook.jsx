@@ -6,6 +6,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 class SingleBook extends Component {
   state = {
     borderColor: "lightblue",
+    addedToCart: null,
     buyed: null,
   };
   selected = () => {
@@ -17,6 +18,9 @@ class SingleBook extends Component {
   };
   buy = () => {
     this.setState({ buyed: true });
+  };
+  addToCart = () => {
+    this.setState({ addedToCart: true });
   };
 
   renderTooltip = (props) => (
@@ -37,14 +41,15 @@ class SingleBook extends Component {
 
               <OverlayTrigger
                 placement="right"
-                delay={{ show: 250, hide: 800 }}
+                delay={{ show: 150, hide: 800 }}
                 overlay={this.renderTooltip}
               >
-                <Button className="bookBtn">
+                <Button onClick={this.addToCart} className="bookBtn">
                   Add To Cart <i className="bi bi-cart4"></i>
                 </Button>
               </OverlayTrigger>
 
+              {this.state.addedToCart && <p>Aggiunto al carello</p>}
               {this.state.buyed && <p>Comprato!</p>}
             </Card.Body>
           </Card>
